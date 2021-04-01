@@ -149,6 +149,6 @@ xopt, f_val, info= fmin_l_bfgs_b(calculate_loss, x_val, fprime=get_grad,
                             maxiter=iterations, disp=True)
 xOut = postprocess_array(xopt)
 xIm = save_original_size(xOut)
-print 'Image saved'
+print ('Image saved')
 end = time.time()
-print 'Time taken: {}'.format(end-start)
+print ('Time taken: {}'.format(end-start))
