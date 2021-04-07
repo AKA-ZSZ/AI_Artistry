@@ -180,6 +180,41 @@ def match_histograms(src_image, ref_image):
     
     return image_after_matching
 
+def calculate_histograms(src_image):
+    """
+    This method matches the source image histogram to the
+    reference signal
+    :param image src_image: The original source image
+    :param image  ref_image: The reference image
+    :return: image_after_matching
+    :rtype: image (array)
+    """
+    # Split the images into the different color channels
+    # b means blue, g means green and r means red
+    src_b, src_g, src_r = cv2.split(src_image)
+
+    # Compute the b, g, and r histograms separately
+    # The flatten() Numpy method returns a copy of the array c
+    # collapsed into one dimension.
+    src_hist_blue, bin_0 = np.histogram(src_b.flatten(), 256, [0,256])
+    src_hist_green, bin_1 = np.histogram(src_g.flatten(), 256, [0,256])
+    src_hist_red, bin_2 = np.histogram(src_r.flatten(), 256, [0,256])    
+ 
+    # Compute the normalized cdf for the source and reference image
+    src_cdf_blue = calculate_cdf(src_hist_blue)
+    src_cdf_green = calculate_cdf(src_hist_green)
+    src_cdf_red = calculate_cdf(src_hist_red)
+ 
+    
+    # export data into csvs
+    write_1D_list_to_csv(f"data/src_hist_blue_{iterations}_1",src_hist_blue)
+    write_1D_list_to_csv(f"data/src_hist_green_{iterations}_1",src_hist_green)
+    write_1D_list_to_csv(f"data/src_hist_red_{iterations}_1",src_hist_red)
+
+    write_1D_list_to_csv(f"data/src_cdf_blue_{iterations}_1",src_cdf_blue)
+    write_1D_list_to_csv(f"data/src_cdf_green_{iterations}_1",src_cdf_green)
+    write_1D_list_to_csv(f"data/src_cdf_red_{iterations}_1",src_cdf_red)
+
 def write_1D_list_to_csv(li_header,li):
     np.savetxt(f"{li_header}.csv", li, delimiter=",", fmt='%s', header=li_header)
 
@@ -271,6 +306,12 @@ def main():
  
     # Save the output images
     cv2.imwrite(f"{cwd}\imgs\\final_imgs\\result_{iterations}_1_post.jpg", output_image)
+
+
+    # calculate hist and cdf for the generated pic
+    image_generated = cv2.imread(cv2.samples.findFile(f"{cwd}\imgs\\final_imgs\\result_{iterations}_1_post.jpg"))
+    calculate_histograms(image_generated)
+
     if mask_provided:
         cv2.imwrite(OUTPUT_MASKED_IMAGE, output_masked)
    
