@@ -8,14 +8,31 @@ from keras.applications.vgg16 import preprocess_input
 from keras.layers import Input
 from scipy.optimize import fmin_l_bfgs_b
 import time
+import os
+
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 ## Specify paths for 1) content image 2) style image and 3) generated image
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 
-cImPath = ''
-sImPath = ''
-genImOutputPath = ''
+# cImPath = ''
+# sImPath = ''
+# genImOutputPath = ''
+cwd = os.getcwd()
+
+# iteration_count=input('Please enter how many iterations you want to run (1 - 1000, int): ')
+iterations=int(input('\nPlease enter how many iterations you want to run (must be integer between 1 and 1000): '))
+cImPath_str=cwd+'\imgs\src_imgs\starrynight.jpg'
+sImPath_str=cwd+'\imgs\src_imgs\kanagawa.jpg'
+genImOutputPath_str=cwd+f'\imgs\\final_imgs\\result_{iterations}.jpg'
+
+# cImPath = r'C:\Users\Steven\Desktop\term3_projects\AI_artistry\AI_Artistry\pics\content.jpg'
+# sImPath = r'C:\Users\Steven\Desktop\term3_projects\AI_artistry\AI_Artistry\pics\Starry-Night-canvas-Vincent-van-Gogh-New-1889.jpg'
+# genImOutputPath = r'C:\Users\Steven\Desktop\term3_projects\AI_artistry\AI_Artistry\pics\generated.jpg'
+
+cImPath =  r"{}".format(cImPath_str)
+sImPath = r"{}".format(sImPath_str)
+genImOutputPath = r"{}".format(genImOutputPath_str)
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~##
 ## Image processing
@@ -142,7 +159,8 @@ P = get_feature_reps(x=cImArr, layer_names=[cLayerName], model=cModel)[0]
 As = get_feature_reps(x=sImArr, layer_names=sLayerNames, model=sModel)
 ws = np.ones(len(sLayerNames))/float(len(sLayerNames))
 
-iterations = 600
+# iterations = 600
+
 x_val = gIm0.flatten()
 start = time.time()
 xopt, f_val, info= fmin_l_bfgs_b(calculate_loss, x_val, fprime=get_grad,
