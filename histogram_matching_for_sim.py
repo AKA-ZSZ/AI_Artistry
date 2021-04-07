@@ -39,7 +39,11 @@ import os
 # Define the file name of the images
 cwd=os.getcwd()
 
-SOURCE_IMAGE = f"{cwd}\imgs\src_imgs\starrynight.jpg"
+# SOURCE_IMAGE = f"{cwd}\imgs\src_imgs\starrynight.jpg"
+
+iterations=1 # give the iterations of the image
+ 
+SOURCE_IMAGE = f"{cwd}\imgs\\final_imgs\\result_{iterations}_1.jpg" # change iterations here, 1 means the generated image used color profile of original content image
 REFERENCE_IMAGE = f"{cwd}\imgs\src_imgs\kanagawa.jpg"
 MASK_IMAGE = "mask.jpg"
 OUTPUT_IMAGE = "aspens_in_fall_forest_output"
@@ -132,50 +136,42 @@ def match_histograms(src_image, ref_image):
     print(src_b)
     
     # export data into csvs
-    write_1D_list_to_csv("data/src_hist_blue",src_hist_blue)
-    write_1D_list_to_csv("data/src_hist_green",src_hist_green)
-    write_1D_list_to_csv("data/src_hist_red",src_hist_red)
+    write_1D_list_to_csv(f"data/src_hist_blue_{iterations}",src_hist_blue)
+    write_1D_list_to_csv(f"data/src_hist_green_{iterations}",src_hist_green)
+    write_1D_list_to_csv(f"data/src_hist_red_{iterations}",src_hist_red)
 
-    write_1D_list_to_csv("data/ref_hist_blue",ref_hist_blue)
-    write_1D_list_to_csv("data/ref_hist_green",ref_hist_green)
-    write_1D_list_to_csv("data/ref_hist_red",ref_hist_red)
+    write_1D_list_to_csv(f"data/src_cdf_blue_{iterations}",src_cdf_blue)
+    write_1D_list_to_csv(f"data/src_cdf_green_{iterations}",src_cdf_green)
+    write_1D_list_to_csv(f"data/src_cdf_red_{iterations}",src_cdf_red)
 
-    write_1D_list_to_csv("data/src_cdf_blue",src_cdf_blue)
-    write_1D_list_to_csv("data/src_cdf_green",src_cdf_green)
-    write_1D_list_to_csv("data/src_cdf_red",src_cdf_red)
-    
-    write_1D_list_to_csv("data/ref_cdf_blue",ref_cdf_blue)
-    write_1D_list_to_csv("data/ref_cdf_green",ref_cdf_green)
-    write_1D_list_to_csv("data/ref_cdf_red",ref_cdf_red)
-
-    write_1D_list_to_csv("data/src_ref_blue_lookup_table",blue_lookup_table)
-    write_1D_list_to_csv("data/src_ref_green_lookup_table",green_lookup_table)
-    write_1D_list_to_csv("data/src_ref_red_lookup_table",red_lookup_table)
+    write_1D_list_to_csv(f"data/src_ref_blue_lookup_table_{iterations}",blue_lookup_table)
+    write_1D_list_to_csv(f"data/src_ref_green_lookup_table_{iterations}",green_lookup_table)
+    write_1D_list_to_csv(f"data/src_ref_red_lookup_table_{iterations}",red_lookup_table)
     
     # create hists
     # configure and draw the histogram figure of source image
-    plt.figure()
-    plt.title("Color Histogram of Source Image")
-    plt.xlabel("Color value")
-    plt.ylabel("Pixels Count")
-    plt.xlim([0, 256])  # <- named arguments do not work here
+    # plt.figure()
+    # plt.title("Color Histogram of Source Image")
+    # plt.xlabel("Color value")
+    # plt.ylabel("Pixels Count")
+    # plt.xlim([0, 256])  # <- named arguments do not work here
 
-    plt.plot(bin_0[0:-1], src_hist_blue,color='blue')  # <- or here
-    plt.plot(bin_1[0:-1], src_hist_green,color='green')  # <- or here
-    plt.plot(bin_2[0:-1], src_hist_red,color='red')  # <- or here
-    plt.show()
+    # plt.plot(bin_0[0:-1], src_hist_blue,color='blue')  # <- or here
+    # plt.plot(bin_1[0:-1], src_hist_green,color='green')  # <- or here
+    # plt.plot(bin_2[0:-1], src_hist_red,color='red')  # <- or here
+    # plt.show()
 
-    # configure and draw the histogram figure of ref image
-    plt.figure()
-    plt.title("Color Histogram of Reference Image")
-    plt.xlabel("Color value")
-    plt.ylabel("Pixels Count")
-    plt.xlim([0, 256])  # <- named arguments do not work here
+    # # configure and draw the histogram figure of ref image
+    # plt.figure()
+    # plt.title("Color Histogram of Reference Image")
+    # plt.xlabel("Color value")
+    # plt.ylabel("Pixels Count")
+    # plt.xlim([0, 256])  # <- named arguments do not work here
 
-    plt.plot(bin_3[0:-1], ref_hist_blue,color='blue')  # <- or here
-    plt.plot(bin_4[0:-1], ref_hist_green,color='green')  # <- or here
-    plt.plot(bin_5[0:-1], ref_hist_red,color='red')  # <- or here
-    plt.show()
+    # plt.plot(bin_3[0:-1], ref_hist_blue,color='blue')  # <- or here
+    # plt.plot(bin_4[0:-1], ref_hist_green,color='green')  # <- or here
+    # plt.plot(bin_5[0:-1], ref_hist_red,color='red')  # <- or here
+    # plt.show()
 
     
     
@@ -271,7 +267,7 @@ def main():
         output_masked = mask_image(output_image, image_mask)
  
     # Save the output images
-    cv2.imwrite(f"{cwd}\imgs\src_imgs\\modified_starrynight.jpg", output_image)
+    cv2.imwrite(f"{cwd}\imgs\\final_imgs\\result_{iterations}_2.jpg", output_image)
     if mask_provided:
         cv2.imwrite(OUTPUT_MASKED_IMAGE, output_masked)
    

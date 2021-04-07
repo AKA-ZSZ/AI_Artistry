@@ -22,9 +22,18 @@ cwd = os.getcwd()
 
 # iteration_count=input('Please enter how many iterations you want to run (1 - 1000, int): ')
 iterations=int(input('\nPlease enter how many iterations you want to run (must be integer between 1 and 1000): '))
-cImPath_str=cwd+'\imgs\src_imgs\starrynight.jpg'
-sImPath_str=cwd+'\imgs\src_imgs\kanagawa.jpg'
-genImOutputPath_str=cwd+f'\imgs\\final_imgs\\result_{iterations}.jpg'
+is_hist_match=int(input("Type 1 for original content img, 2 for modified: "))
+
+if is_hist_match==1:
+
+    cImPath_str=cwd+'\imgs\src_imgs\starrynight.jpg'
+    sImPath_str=cwd+'\imgs\src_imgs\kanagawa.jpg'
+
+if is_hist_match==2:
+    cImPath_str=cwd+'\imgs\src_imgs\modified_starrynight.jpg'
+    sImPath_str=cwd+'\imgs\src_imgs\kanagawa.jpg'
+
+genImOutputPath_str=cwd+f'\imgs\\final_imgs\\result_{iterations}_{is_hist_match}.jpg'
 
 # cImPath = r'C:\Users\Steven\Desktop\term3_projects\AI_artistry\AI_Artistry\pics\content.jpg'
 # sImPath = r'C:\Users\Steven\Desktop\term3_projects\AI_artistry\AI_Artistry\pics\Starry-Night-canvas-Vincent-van-Gogh-New-1889.jpg'
