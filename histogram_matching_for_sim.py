@@ -41,7 +41,10 @@ cwd=os.getcwd()
 
 # SOURCE_IMAGE = f"{cwd}\imgs\src_imgs\starrynight.jpg"
 
-iterations=1 # give the iterations of the image
+# give the iterations of the image
+# iterations= <variable>
+
+iterations=int(input("Please enter the iterations: "))
  
 SOURCE_IMAGE = f"{cwd}\imgs\\final_imgs\\result_{iterations}_1.jpg" # change iterations here, 1 means the generated image used color profile of original content image
 REFERENCE_IMAGE = f"{cwd}\imgs\src_imgs\kanagawa.jpg"
@@ -267,7 +270,7 @@ def main():
         output_masked = mask_image(output_image, image_mask)
  
     # Save the output images
-    cv2.imwrite(f"{cwd}\imgs\\final_imgs\\result_{iterations}_2.jpg", output_image)
+    cv2.imwrite(f"{cwd}\imgs\\final_imgs\\result_{iterations}_1_post.jpg", output_image)
     if mask_provided:
         cv2.imwrite(OUTPUT_MASKED_IMAGE, output_masked)
    
