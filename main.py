@@ -30,8 +30,8 @@ if is_hist_match==1:
     sImPath_str=cwd+'\imgs\src_imgs\kanagawa.jpg'
 
 if is_hist_match==2:
-    cImPath_str=cwd+'\imgs\src_imgs\modified_starrynight.jpg'
-    sImPath_str=cwd+'\imgs\src_imgs\kanagawa.jpg'
+    cImPath_str=cwd+'\imgs\src_imgs\starrynight.jpg'
+    sImPath_str=cwd+'\imgs\src_imgs\modified_kanagawa.jpg'
 
 genImOutputPath_str=cwd+f'\imgs\\final_imgs\\result_{iterations}_{is_hist_match}.jpg'
 

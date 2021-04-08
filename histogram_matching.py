@@ -39,8 +39,8 @@ import os
 # Define the file name of the images
 cwd=os.getcwd()
 
-SOURCE_IMAGE = f"{cwd}\imgs\src_imgs\starrynight.jpg"
-REFERENCE_IMAGE = f"{cwd}\imgs\src_imgs\kanagawa.jpg"
+SOURCE_IMAGE = f"{cwd}\imgs\src_imgs\kanagawa.jpg"
+REFERENCE_IMAGE = f"{cwd}\imgs\src_imgs\starrynight.jpg"
 MASK_IMAGE = "mask.jpg"
 OUTPUT_IMAGE = "aspens_in_fall_forest_output"
 OUTPUT_MASKED_IMAGE = "aspens_in_fall_forest_output_masked.jpg"
@@ -271,7 +271,7 @@ def main():
         output_masked = mask_image(output_image, image_mask)
  
     # Save the output images
-    cv2.imwrite(f"{cwd}\imgs\src_imgs\\modified_starrynight.jpg", output_image)
+    cv2.imwrite(f"{cwd}\imgs\src_imgs\\modified_kanagawa.jpg", output_image)
     if mask_provided:
         cv2.imwrite(OUTPUT_MASKED_IMAGE, output_masked)
    
