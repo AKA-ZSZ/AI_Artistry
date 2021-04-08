@@ -47,7 +47,7 @@ cwd=os.getcwd()
 iterations=int(input("Please enter the iterations: "))
  
 SOURCE_IMAGE = f"{cwd}\imgs\\final_imgs\\result_{iterations}_1.jpg" # change iterations here, 1 means the generated image used color profile of original content image
-REFERENCE_IMAGE = f"{cwd}\imgs\src_imgs\kanagawa.jpg"
+REFERENCE_IMAGE = f"{cwd}\imgs\src_imgs\starrynight.jpg"
 MASK_IMAGE = "mask.jpg"
 OUTPUT_IMAGE = "aspens_in_fall_forest_output"
 OUTPUT_MASKED_IMAGE = "aspens_in_fall_forest_output_masked.jpg"
