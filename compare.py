@@ -38,10 +38,10 @@ def compare_images(imageA, imageB, title):
 original_no_HM = cv2.imread("imgs/final_imgs/result_100_1.jpg") # NST - original content and style images, no HM 
 pre_HM = cv2.imread("imgs/final_imgs/result_100_2.jpg") # HM before NST - original content image and altered style image
 post_HM = cv2.imread("imgs/final_imgs/result_100_1_post.jpg") # HM after NST - HM after the result from original NST
-# convert the images to grayscale
-# original = cv2.cvtColor(original, cv2.COLOR_BGR2GRAY)
-# contrast = cv2.cvtColor(contrast, cv2.COLOR_BGR2GRAY)
-# shopped = cv2.cvtColor(shopped, cv2.COLOR_BGR2GRAY)
+# convert the images to RGB
+original_no_HM = cv2.cvtColor(original_no_HM, cv2.COLOR_BGR2RGB)
+pre_HM = cv2.cvtColor(pre_HM, cv2.COLOR_BGR2RGB)
+post_HM = cv2.cvtColor(post_HM, cv2.COLOR_BGR2RGB)
 
 # initialize the figure
 fig = plt.figure("Images")
