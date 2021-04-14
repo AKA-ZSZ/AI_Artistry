@@ -1,28 +1,22 @@
 # import the necessary packages
+
+# Author: Adrian Rosebrock, PhD
+
 from skimage.metrics import structural_similarity as ssim
+from skimage.metrics import normalized_root_mse as nrmse
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 
-def mse(imageA, imageB):
-	# the 'Mean Squared Error' between the two images is the
-	# sum of the squared difference between the two images;
-	# NOTE: the two images must have the same dimension
-	err = np.sum((imageA.astype("float") - imageB.astype("float")) ** 2)
-	err /= float(imageA.shape[0] * imageA.shape[1])
-
-	# return the MSE, the lower the error, the more "similar"
-	# the two images are
-	return err
 
 def compare_images(imageA, imageB, title):
-	# compute the mean squared error and structural similarity
+	# compute the normalizes root mean squared error and structural similarity
 	# index for the images
-	m = mse(imageA, imageB)
+	m = nrmse(imageA, imageB)
 	s = ssim(imageA, imageB, multichannel=True)
 	# setup the figure
 	fig = plt.figure(title)
-	plt.suptitle("MSE: %.2f, SSIM: %.2f" % (m, s))
+	plt.suptitle("NRMSE: %.2f, SSIM: %.2f" % (m, s))
 	# show first image
 	ax = fig.add_subplot(1, 2, 1)
 	plt.imshow(imageA, cmap = plt.cm.gray)
@@ -34,10 +28,21 @@ def compare_images(imageA, imageB, title):
 	# show the images
 	plt.show()
 
-# load the images
-original_no_HM = cv2.imread("imgs/final_imgs/result_100_1.jpg") # NST - original content and style images, no HM 
-pre_HM = cv2.imread("imgs/final_imgs/result_100_2.jpg") # HM before NST - original content image and altered style image
-post_HM = cv2.imread("imgs/final_imgs/result_100_1_post.jpg") # HM after NST - HM after the result from original NST
+# load the images set 1
+# original_no_HM = cv2.imread("imgs/final_imgs/result_100_1.jpg") # NST - original content and style images, no HM 
+# pre_HM = cv2.imread("imgs/final_imgs/result_100_2.jpg") # HM before NST - original content image and altered style image
+# post_HM = cv2.imread("imgs/final_imgs/result_100_1_post.jpg") # HM after NST - HM after the result from original NST
+
+# # load the images set 2
+# original_no_HM = cv2.imread("imgs/final_imgs/result_100_1_set2.jpg") # NST - original content and style images, no HM 
+# pre_HM = cv2.imread("imgs/final_imgs/result_100_2_set2.jpg") # HM before NST - original content image and altered style image
+# post_HM = cv2.imread("imgs/final_imgs/result_100_1_post_set2.jpg") # HM after NST - HM after the result from original NST
+
+# load the images set 3
+original_no_HM = cv2.imread("imgs/final_imgs/result_100_1_set3.jpg") # NST - original content and style images, no HM 
+pre_HM = cv2.imread("imgs/final_imgs/result_100_2_set3.jpg") # HM before NST - original content image and altered style image
+post_HM = cv2.imread("imgs/final_imgs/result_100_1_post_set3.jpg") # HM after NST - HM after the result from original NST
+
 # convert the images to RGB
 original_no_HM = cv2.cvtColor(original_no_HM, cv2.COLOR_BGR2RGB)
 pre_HM = cv2.cvtColor(pre_HM, cv2.COLOR_BGR2RGB)
